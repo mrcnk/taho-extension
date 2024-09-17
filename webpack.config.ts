@@ -18,6 +18,10 @@ import "dotenv-defaults/config"
 
 const supportedBrowsers = ["chrome"]
 
+if (process.env.SUPPORT_BROWSER === "firefox") {
+  supportedBrowsers.push("firefox")
+}
+
 // Replicated and adjusted for each target browser and the current build mode.
 const baseConfig: Configuration = {
   devtool: "source-map",
@@ -65,6 +69,10 @@ const baseConfig: Configuration = {
       process: require.resolve("process/browser"),
       // these are required for @tallyho/keyring-controller
       crypto: require.resolve("crypto-browserify"),
+      http: require.resolve("stream-http"),
+      https: require.resolve("https-browserify"),
+      zlib: require.resolve("browserify-zlib"),
+      url: require.resolve("url"),
     },
   },
   plugins: [
